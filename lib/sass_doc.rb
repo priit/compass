@@ -118,7 +118,7 @@ module SassDoc
     end
 
     def parse!
-      @ast = Sass::Engine.new(@contents).send :render_to_tree
+      @ast = Sass::Engine.new(@contents, Compass.sass_engine_options).send :render_to_tree
       prev_child = nil
       @ast.children.each do |child|
         if child.is_a? Sass::Tree::MixinDefNode
