@@ -1,3 +1,17 @@
+//**
+  Sets background colors for a table so that rows and columns alternate and are shaded
+  correctly.
+  @parameter even_row_color
+    The color of even rows. Even rows must have the .even class on them
+  @parameter odd_row_color
+    The color of odd rows. Odd rows must have the .odd class on them.
+  @parameter dark_intersection
+    This color will be subracted from the row color for even columns.
+  @parameter header_color
+    The color of the header.
+  @parameter footer_color
+    The color of the footer.
+
 =alternating-rows-and-columns(!even_row_color, !odd_row_color, !dark_intersection, !header_color = #FFF, !footer_color = #FFF)
   th
     :background-color= !header_color
