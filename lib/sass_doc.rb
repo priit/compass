@@ -15,8 +15,11 @@ module SassDoc
 
       def raw_documentation
         @raw_documentation ||= begin
-          [] unless comment.value =~ /^\*\*+/
-          raw_lines(comment, :first => true, :indent => -1)
+          unless comment && comment.value =~ /^\*\*+/
+            []
+          else
+            raw_lines(comment, :first => true, :indent => -1)
+          end
         end
       end
 
@@ -83,26 +86,32 @@ module SassDoc
           text << "]" if optional_found
           text << ")"
         end
+        text
       end
 
       def to_plain_text
         sig = signature
         separator = "-" * (sig.length + 7)
-        lines = ["Mixin: #{sig}",
-         separator,
-         mixin_doc,
-         ""
-        ]
+        lines = ["Mixin: #{sig}"]
+        if (doc = mixin_doc).length > 0
+          lines += [
+            separator,
+            mixin_doc,
+            ""
+          ]
+        end
         arguments.each do |arg|
-          firstline = "Parameter: #{arg[:name]}"
-          firstline << " (defaults to: #{arg[:default_value]})" if arg[:default_value]
-          lines << firstline
-          if (doc = arg_docs[arg[:name]])
-            doc.split(/\n/).each do |line|
-              lines << "  #{line}"
+          if arg[:default_value] || arg_docs[arg[:name]]
+            firstline = "Parameter: #{arg[:name]}"
+            firstline << " (default value: #{arg[:default_value]})" if arg[:default_value]
+            lines << firstline
+            if (doc = arg_docs[arg[:name]])
+              doc.split(/\n/).each do |line|
+                lines << "  #{line}"
+              end
             end
           end
-        end        
+        end
         lines.join("\n")
       end
     end
