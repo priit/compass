@@ -1,0 +1,47 @@
+!default_rounded_amount ||= 5px
+
+// Round all corners by amount
+=round-corners(!radius = !default_rounded_amount)
+  border-radius= !radius
+  -moz-border-radius= !radius
+  -webkit-border-radius= !radius
+
+// Round corner at position by amount.
+// values for !vert: "top", "bottom"
+// values for !horz: "left", "right
+=round-corner(!vert, !horz, !radius = !default_rounded_amount)
+  border-#{!vert}-#{!horz}-radius= !radius
+  -moz-border-radius-#{!vert}#{!horz}= !radius
+  -webkit-border-#{!vert}-#{!horz}-radius= !radius
+  
+=round-top-left-corner(!radius = !default_rounded_amount)
+  +border-corner-radius("top", "left", !radius)
+
+=round-top-right-corner(!radius = !default_rounded_amount)
+  +border-corner-radius("top", "right", !radius)
+
+=round-bottom-left-corner(!radius = !default_rounded_amount)
+  +border-corner-radius("bottom", "left", !radius)
+
+=round-bottom-right-corner(!radius = !default_rounded_amount)
+  +border-corner-radius("bottom", "right", !radius)
+
+// Round left corners by amount
+=round-left-corners(!radius = !default_rounded_amount)
+  +round-top-left-corner(!radius)
+  +round-top-left-corner(!radius)
+
+// Round right corners by amount
+=round-right-corners(!radius = !default_rounded_amount)
+  +round-top-right-corner(!radius)
+  +round-bottom-right-corner(!radius)
+
+// Round top corners by amount
+=round-top-corners(!radius = !default_rounded_amount)
+  +round-top-left-corner(!radius)
+  +round-top-right-corner(!radius)
+
+// Round bottom corners by amount
+=round-bottom-corners(!radius = !default_rounded_amount)
+  +round-bottom-left-corner(!radius)
+  +round-bottom-right-corner(!radius)
