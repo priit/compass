@@ -9,9 +9,9 @@
   a
     +sprite-background("icons-32.png")
     a.twitter
-      +sprite-position-x(1)
+      +sprite-column(1)
     a.facebook
-      +sprite-position-y(2)
+      +sprite-row(2)
     ...
  
 !sprite_default_size  ||= 32px
@@ -38,11 +38,11 @@
   :overflow hidden
  
 // Allows horizontal sprite positioning optimized for a single row of sprites.
-=sprite-position-x(!col, !width = !sprite_image_default_width, !margin = !sprite_default_margin)
+=sprite-column(!col, !width = !sprite_image_default_width, !margin = !sprite_default_margin)
   +sprite-position(!col, 1, !width, 0px, !margin)
  
 // Allows vertical sprite positioning optimized for a single column of sprites.
-=sprite-position-y(!row, !height = !sprite_image_default_height, !margin = !sprite_default_margin)
+=sprite-row(!row, !height = !sprite_image_default_height, !margin = !sprite_default_margin)
   +sprite-position(1, !row, 0px, !height, !margin)
  
 // Allows vertical and horizontal sprite positioning from a grid of equal dimensioned sprites.
